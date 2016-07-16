@@ -58,8 +58,8 @@
 #define P_VCOMP PORTB1	// вход компаратора напряжения
 #define P_TOUT PORTB0	// вывод управления симмистором
 
-#define powerOn()	PORTB |= 1<<P_TOUT // активный уровень лог. 0
-#define powerOff()	PORTB &= ~(1<<P_TOUT)
+#define powerOn()	(PORTB &= ~(1<<P_TOUT)) // активный уровень лог. 0
+#define powerOff()	(PORTB |= 1<<P_TOUT)
 
 
 const uint8_t PROGMEM rmsCVal[] = {
