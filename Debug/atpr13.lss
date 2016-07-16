@@ -1,0 +1,890 @@
+
+atpr13.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         00000388  00000000  00000000  00000094  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000000  00800060  00800060  0000041e  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .bss          00000007  00800060  00800060  0000041c  2**0
+                  ALLOC
+  3 .eeprom       00000002  00810000  00810000  0000041c  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  4 .comment      00000030  00000000  00000000  0000041e  2**0
+                  CONTENTS, READONLY
+  5 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000450  2**2
+                  CONTENTS, READONLY
+  6 .debug_aranges 00000040  00000000  00000000  0000048c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_info   00000405  00000000  00000000  000004cc  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_abbrev 00000217  00000000  00000000  000008d1  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_line   00000260  00000000  00000000  00000ae8  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_frame  00000094  00000000  00000000  00000d48  2**2
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_str    00000232  00000000  00000000  00000ddc  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 12 .debug_loc    00000246  00000000  00000000  0000100e  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 13 .debug_ranges 00000030  00000000  00000000  00001254  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	19 c0       	rjmp	.+50     	; 0x34 <__ctors_end>
+   2:	26 c0       	rjmp	.+76     	; 0x50 <__bad_interrupt>
+   4:	b7 c0       	rjmp	.+366    	; 0x174 <__vector_2>
+   6:	24 c0       	rjmp	.+72     	; 0x50 <__bad_interrupt>
+   8:	23 c0       	rjmp	.+70     	; 0x50 <__bad_interrupt>
+   a:	22 c0       	rjmp	.+68     	; 0x50 <__bad_interrupt>
+   c:	f2 c0       	rjmp	.+484    	; 0x1f2 <__vector_6>
+   e:	20 c0       	rjmp	.+64     	; 0x50 <__bad_interrupt>
+  10:	1f c0       	rjmp	.+62     	; 0x50 <__bad_interrupt>
+  12:	1e c0       	rjmp	.+60     	; 0x50 <__bad_interrupt>
+  14:	29 c0       	rjmp	.+82     	; 0x68 <ledSM+0x16>
+  16:	2c c0       	rjmp	.+88     	; 0x70 <ledSM+0x1e>
+  18:	2d c0       	rjmp	.+90     	; 0x74 <ledSM+0x22>
+  1a:	31 c0       	rjmp	.+98     	; 0x7e <ledSM+0x2c>
+  1c:	37 c0       	rjmp	.+110    	; 0x8c <ledSM+0x3a>
+  1e:	3b c0       	rjmp	.+118    	; 0x96 <ledSM+0x44>
+  20:	3d c0       	rjmp	.+122    	; 0x9c <ledSM+0x4a>
+  22:	41 c0       	rjmp	.+130    	; 0xa6 <__stack+0x7>
+  24:	46 c0       	rjmp	.+140    	; 0xb2 <__stack+0x13>
+  26:	49 c0       	rjmp	.+146    	; 0xba <__stack+0x1b>
+
+00000028 <__trampolines_end>:
+  28:	ff cb       	rjmp	.-2050   	; 0xfffff828 <__eeprom_end+0xff7ef826>
+  2a:	b4 a1       	ldd	r27, Z+36	; 0x24
+  2c:	90 80       	ld	r9, Z
+  2e:	6f 5e       	subi	r22, 0xEF	; 239
+  30:	4b 34       	cpi	r20, 0x4B	; 75
+	...
+
+00000034 <__ctors_end>:
+  34:	11 24       	eor	r1, r1
+  36:	1f be       	out	0x3f, r1	; 63
+  38:	cf e9       	ldi	r28, 0x9F	; 159
+  3a:	cd bf       	out	0x3d, r28	; 61
+
+0000003c <__do_clear_bss>:
+  3c:	20 e0       	ldi	r18, 0x00	; 0
+  3e:	a0 e6       	ldi	r26, 0x60	; 96
+  40:	b0 e0       	ldi	r27, 0x00	; 0
+  42:	01 c0       	rjmp	.+2      	; 0x46 <.do_clear_bss_start>
+
+00000044 <.do_clear_bss_loop>:
+  44:	1d 92       	st	X+, r1
+
+00000046 <.do_clear_bss_start>:
+  46:	a7 36       	cpi	r26, 0x67	; 103
+  48:	b2 07       	cpc	r27, r18
+  4a:	e1 f7       	brne	.-8      	; 0x44 <.do_clear_bss_loop>
+  4c:	f2 d0       	rcall	.+484    	; 0x232 <main>
+  4e:	9a c1       	rjmp	.+820    	; 0x384 <_exit>
+
+00000050 <__bad_interrupt>:
+  50:	d7 cf       	rjmp	.-82     	; 0x0 <__vectors>
+
+00000052 <ledSM>:
+ * \return void
+ */
+void ledSM(uint8_t st, uint8_t t)
+{
+	
+	ledGreenOff();
+  52:	c4 98       	cbi	0x18, 4	; 24
+	ledRedOff();
+  54:	c3 98       	cbi	0x18, 3	; 24
+	
+	switch(st)
+  56:	90 e0       	ldi	r25, 0x00	; 0
+  58:	fc 01       	movw	r30, r24
+  5a:	31 97       	sbiw	r30, 0x01	; 1
+  5c:	ea 30       	cpi	r30, 0x0A	; 10
+  5e:	f1 05       	cpc	r31, r1
+  60:	68 f5       	brcc	.+90     	; 0xbc <__stack+0x1d>
+  62:	e6 5f       	subi	r30, 0xF6	; 246
+  64:	ff 4f       	sbci	r31, 0xFF	; 255
+  66:	09 94       	ijmp
+			//break;
+		//}
+		case 1:
+		{
+			//ledRedOff();
+			if(t < LED_PERIOD/2)
+  68:	6f 37       	cpi	r22, 0x7F	; 127
+  6a:	40 f5       	brcc	.+80     	; 0xbc <__stack+0x1d>
+				ledGreenOn();
+  6c:	c4 9a       	sbi	0x18, 4	; 24
+  6e:	08 95       	ret
+			break;
+		}
+		case 2:
+		{
+			//ledRedOff();
+			ledGreenOn();
+  70:	c4 9a       	sbi	0x18, 4	; 24
+			break;
+  72:	08 95       	ret
+		}
+		case 3:
+		{
+			ledGreenOn();
+  74:	c4 9a       	sbi	0x18, 4	; 24
+			if(t < LED_PERIOD/2)
+  76:	6f 37       	cpi	r22, 0x7F	; 127
+  78:	08 f5       	brcc	.+66     	; 0xbc <__stack+0x1d>
+				ledRedOn();
+  7a:	c3 9a       	sbi	0x18, 3	; 24
+  7c:	08 95       	ret
+				//ledRedOff();
+			break;
+		}
+		case 4:
+		{
+			if(((t < LED_PERIOD/2) && (t > LED_PERIOD*3/8)) || ((t < LED_PERIOD/4) && (t > LED_PERIOD/8)))
+  7e:	6f 7b       	andi	r22, 0xBF	; 191
+  80:	60 52       	subi	r22, 0x20	; 32
+  82:	6f 31       	cpi	r22, 0x1F	; 31
+  84:	d8 f4       	brcc	.+54     	; 0xbc <__stack+0x1d>
+			{
+				ledRedOn();
+  86:	c3 9a       	sbi	0x18, 3	; 24
+				ledGreenOn();
+  88:	c4 9a       	sbi	0x18, 4	; 24
+  8a:	08 95       	ret
+			break;
+		}
+		case 5:
+		{
+
+			if(t < LED_PERIOD/2)
+  8c:	6f 37       	cpi	r22, 0x7F	; 127
+  8e:	b0 f4       	brcc	.+44     	; 0xbc <__stack+0x1d>
+			{
+				ledRedOn();
+  90:	c3 9a       	sbi	0x18, 3	; 24
+				ledGreenOn();
+  92:	c4 9a       	sbi	0x18, 4	; 24
+  94:	08 95       	ret
+			//}
+			break;
+		}
+		case 6:
+		{
+			ledRedOn();
+  96:	c3 9a       	sbi	0x18, 3	; 24
+			ledGreenOn();
+  98:	c4 9a       	sbi	0x18, 4	; 24
+			break;
+  9a:	08 95       	ret
+		}
+		case 7:
+		{
+			ledRedOn();
+  9c:	c3 9a       	sbi	0x18, 3	; 24
+			if(t < LED_PERIOD/2)
+  9e:	6f 37       	cpi	r22, 0x7F	; 127
+  a0:	68 f4       	brcc	.+26     	; 0xbc <__stack+0x1d>
+				ledGreenOn();
+  a2:	c4 9a       	sbi	0x18, 4	; 24
+  a4:	08 95       	ret
+			break;
+		}
+		case 8:
+		{
+			//ledGreenOff();
+			if(((t < LED_PERIOD/2) && (t > LED_PERIOD*3/8)) || ((t < LED_PERIOD/4) && (t > LED_PERIOD/8)))
+  a6:	6f 7b       	andi	r22, 0xBF	; 191
+  a8:	60 52       	subi	r22, 0x20	; 32
+  aa:	6f 31       	cpi	r22, 0x1F	; 31
+  ac:	38 f4       	brcc	.+14     	; 0xbc <__stack+0x1d>
+			{
+				ledRedOn();
+  ae:	c3 9a       	sbi	0x18, 3	; 24
+  b0:	08 95       	ret
+			break;
+		}
+		case 9:
+		{
+			//ledGreenOff();
+			if(t < LED_PERIOD/2)
+  b2:	6f 37       	cpi	r22, 0x7F	; 127
+  b4:	18 f4       	brcc	.+6      	; 0xbc <__stack+0x1d>
+				ledRedOn();
+  b6:	c3 9a       	sbi	0x18, 3	; 24
+  b8:	08 95       	ret
+			break;
+		}
+		case 10:
+		{
+			//ledGreenOff();
+			ledRedOn();
+  ba:	c3 9a       	sbi	0x18, 3	; 24
+  bc:	08 95       	ret
+
+000000be <btnSM>:
+ * \return uint8_t
+ */
+uint8_t btnSM()
+{
+	
+	switch(btnSt)
+  be:	80 91 61 00 	lds	r24, 0x0061
+  c2:	81 30       	cpi	r24, 0x01	; 1
+  c4:	79 f0       	breq	.+30     	; 0xe4 <btnSM+0x26>
+  c6:	28 f0       	brcs	.+10     	; 0xd2 <btnSM+0x14>
+  c8:	82 30       	cpi	r24, 0x02	; 2
+  ca:	e1 f0       	breq	.+56     	; 0x104 <btnSM+0x46>
+  cc:	83 30       	cpi	r24, 0x03	; 3
+  ce:	59 f1       	breq	.+86     	; 0x126 <btnSM+0x68>
+  d0:	42 c0       	rjmp	.+132    	; 0x156 <btnSM+0x98>
+	{
+		case BTN_CH1:
+		{
+			
+			// шаг 1 проверка кнопок
+			if(btnCheck())
+  d2:	b2 99       	sbic	0x16, 2	; 22
+  d4:	40 c0       	rjmp	.+128    	; 0x156 <btnSM+0x98>
+			{
+				// если хоть одна нажата -  запоминаем номер и переходим дальше
+				btnTmr = BTN_DELAY1;
+  d6:	85 e0       	ldi	r24, 0x05	; 5
+  d8:	80 93 65 00 	sts	0x0065, r24
+				btnSt = BTN_DL1;
+  dc:	81 e0       	ldi	r24, 0x01	; 1
+  de:	80 93 61 00 	sts	0x0061, r24
+  e2:	39 c0       	rjmp	.+114    	; 0x156 <btnSM+0x98>
+			break;
+		}
+		case BTN_DL1:
+		{
+			// шаг 2 ждем некоторое время и снова проверяем кнопки
+			if(btnTmr == 0)
+  e4:	80 91 65 00 	lds	r24, 0x0065
+  e8:	81 11       	cpse	r24, r1
+  ea:	40 c0       	rjmp	.+128    	; 0x16c <btnSM+0xae>
+			{
+				if(btnCheck())
+  ec:	b2 99       	sbic	0x16, 2	; 22
+  ee:	07 c0       	rjmp	.+14     	; 0xfe <btnSM+0x40>
+				{
+					// если кнопка всё ещё нажата переходим дальше
+					btnTmr = BTN_DELAY2;
+  f0:	84 e6       	ldi	r24, 0x64	; 100
+  f2:	80 93 65 00 	sts	0x0065, r24
+					btnSt = BTN_CH2;
+  f6:	82 e0       	ldi	r24, 0x02	; 2
+  f8:	80 93 61 00 	sts	0x0061, r24
+  fc:	2c c0       	rjmp	.+88     	; 0x156 <btnSM+0x98>
+				}
+				else
+				{
+					// иначе переходим на шаг 1
+					btnSt = BTN_CH1;
+  fe:	10 92 61 00 	sts	0x0061, r1
+ 102:	29 c0       	rjmp	.+82     	; 0x156 <btnSM+0x98>
+			break;
+		}
+		case BTN_CH2:
+		{
+			// шаг 3 ждем отпускания кнопки
+			if(btnCheck() == 0)
+ 104:	b2 9b       	sbis	0x16, 2	; 22
+ 106:	27 c0       	rjmp	.+78     	; 0x156 <btnSM+0x98>
+			{
+				if(btnTmr == 0)
+ 108:	80 91 65 00 	lds	r24, 0x0065
+ 10c:	81 11       	cpse	r24, r1
+ 10e:	04 c0       	rjmp	.+8      	; 0x118 <btnSM+0x5a>
+				{
+					//долгое нажатие
+					btnSt = BTN_CH1;
+ 110:	10 92 61 00 	sts	0x0061, r1
+					return BTN1_LCLICK;
+ 114:	83 e0       	ldi	r24, 0x03	; 3
+ 116:	08 95       	ret
+				}
+				else
+				{
+					// обычное нажатие
+					btnSt = BTN_CH3;
+ 118:	83 e0       	ldi	r24, 0x03	; 3
+ 11a:	80 93 61 00 	sts	0x0061, r24
+					btnTmr = BTN_DELAY3;
+ 11e:	82 e3       	ldi	r24, 0x32	; 50
+ 120:	80 93 65 00 	sts	0x0065, r24
+ 124:	23 c0       	rjmp	.+70     	; 0x16c <btnSM+0xae>
+
+			break;
+		}
+		case BTN_CH3:
+		{
+			if(btnTmr == 0)
+ 126:	80 91 65 00 	lds	r24, 0x0065
+ 12a:	81 11       	cpse	r24, r1
+ 12c:	1f c0       	rjmp	.+62     	; 0x16c <btnSM+0xae>
+			{
+				
+				btnSt = BTN_CH1;
+ 12e:	10 92 61 00 	sts	0x0061, r1
+				if(btnCheck())
+ 132:	b2 99       	sbic	0x16, 2	; 22
+ 134:	06 c0       	rjmp	.+12     	; 0x142 <btnSM+0x84>
+				{
+					btnCnt++;
+ 136:	80 91 64 00 	lds	r24, 0x0064
+ 13a:	8f 5f       	subi	r24, 0xFF	; 255
+ 13c:	80 93 64 00 	sts	0x0064, r24
+ 140:	0a c0       	rjmp	.+20     	; 0x156 <btnSM+0x98>
+				}
+				else
+				{
+					if(btnCnt == 0)
+ 142:	80 91 64 00 	lds	r24, 0x0064
+ 146:	88 23       	and	r24, r24
+ 148:	79 f0       	breq	.+30     	; 0x168 <btnSM+0xaa>
+						// первое нажатие
+						return BTN1_CLICK;
+					else if(btnCnt == 1)
+ 14a:	81 30       	cpi	r24, 0x01	; 1
+ 14c:	21 f4       	brne	.+8      	; 0x156 <btnSM+0x98>
+					{
+						// второе нажатие
+						btnCnt = 0;
+ 14e:	10 92 64 00 	sts	0x0064, r1
+						return BTN1_DCLICK;
+ 152:	82 e0       	ldi	r24, 0x02	; 2
+ 154:	08 95       	ret
+			}
+			break;
+		}
+	}
+	
+	if(btnTmr > 0)
+ 156:	80 91 65 00 	lds	r24, 0x0065
+ 15a:	88 23       	and	r24, r24
+ 15c:	51 f0       	breq	.+20     	; 0x172 <btnSM+0xb4>
+		btnTmr--;
+ 15e:	81 50       	subi	r24, 0x01	; 1
+ 160:	80 93 65 00 	sts	0x0065, r24
+	
+	return 0;
+ 164:	80 e0       	ldi	r24, 0x00	; 0
+ 166:	08 95       	ret
+				}
+				else
+				{
+					if(btnCnt == 0)
+						// первое нажатие
+						return BTN1_CLICK;
+ 168:	81 e0       	ldi	r24, 0x01	; 1
+ 16a:	08 95       	ret
+			}
+			break;
+		}
+	}
+	
+	if(btnTmr > 0)
+ 16c:	80 91 65 00 	lds	r24, 0x0065
+ 170:	f6 cf       	rjmp	.-20     	; 0x15e <btnSM+0xa0>
+		btnTmr--;
+	
+	return 0;
+}
+ 172:	08 95       	ret
+
+00000174 <__vector_2>:
+
+ISR(PCINT0_vect)
+{
+ 174:	1f 92       	push	r1
+ 176:	0f 92       	push	r0
+ 178:	0f b6       	in	r0, 0x3f	; 63
+ 17a:	0f 92       	push	r0
+ 17c:	11 24       	eor	r1, r1
+ 17e:	8f 93       	push	r24
+ 180:	9f 93       	push	r25
+ 182:	ef 93       	push	r30
+ 184:	ff 93       	push	r31
+	
+	//if(PINB & 1<<P_VCOMP)
+		//return;
+	//PORTB ^=LEDP_GREEN;
+
+	if(mode == 1)
+ 186:	80 91 60 00 	lds	r24, 0x0060
+ 18a:	81 30       	cpi	r24, 0x01	; 1
+ 18c:	49 f4       	brne	.+18     	; 0x1a0 <__vector_2+0x2c>
+	{
+		//фазовый режим
+		tmr = pgm_read_byte(&rmsCVal[v]);
+ 18e:	e0 91 63 00 	lds	r30, 0x0063
+ 192:	f0 e0       	ldi	r31, 0x00	; 0
+ 194:	e8 5d       	subi	r30, 0xD8	; 216
+ 196:	ff 4f       	sbci	r31, 0xFF	; 255
+ 198:	e4 91       	lpm	r30, Z
+ 19a:	e0 93 66 00 	sts	0x0066, r30
+ 19e:	20 c0       	rjmp	.+64     	; 0x1e0 <__vector_2+0x6c>
+		//tmr += PER_DELAY;
+	}
+	else if(mode == 2)
+ 1a0:	82 30       	cpi	r24, 0x02	; 2
+ 1a2:	e9 f4       	brne	.+58     	; 0x1de <__vector_2+0x6a>
+	{
+		// если пауза не прошла выходим
+		if(tmr)
+ 1a4:	80 91 66 00 	lds	r24, 0x0066
+ 1a8:	81 11       	cpse	r24, r1
+ 1aa:	1a c0       	rjmp	.+52     	; 0x1e0 <__vector_2+0x6c>
+			return;
+		//числоимпульсный режим	
+		//начало периода	
+		if((PINB & 1<<P_VCOMP) == 0)
+ 1ac:	b1 99       	sbic	0x16, 1	; 22
+ 1ae:	18 c0       	rjmp	.+48     	; 0x1e0 <__vector_2+0x6c>
+			{
+				// считаем кол-во периодов и сравниваем с значением вых. мощности
+
+				if(cnt < v)
+ 1b0:	90 91 62 00 	lds	r25, 0x0062
+ 1b4:	80 91 63 00 	lds	r24, 0x0063
+ 1b8:	98 17       	cp	r25, r24
+ 1ba:	10 f4       	brcc	.+4      	; 0x1c0 <__vector_2+0x4c>
+					powerOn();
+ 1bc:	c0 9a       	sbi	0x18, 0	; 24
+ 1be:	01 c0       	rjmp	.+2      	; 0x1c2 <__vector_2+0x4e>
+				else
+					powerOff();
+ 1c0:	c0 98       	cbi	0x18, 0	; 24
+
+				if(cnt	< 10)
+ 1c2:	80 91 62 00 	lds	r24, 0x0062
+ 1c6:	8a 30       	cpi	r24, 0x0A	; 10
+ 1c8:	20 f4       	brcc	.+8      	; 0x1d2 <__vector_2+0x5e>
+					cnt++;
+ 1ca:	8f 5f       	subi	r24, 0xFF	; 255
+ 1cc:	80 93 62 00 	sts	0x0062, r24
+ 1d0:	02 c0       	rjmp	.+4      	; 0x1d6 <__vector_2+0x62>
+				else
+					cnt = 0;;
+ 1d2:	10 92 62 00 	sts	0x0062, r1
+				// делаем паузу на время перехода сетевого напряжения через 0
+				// для защиты от ложных срабатываний
+				tmr = 50;
+ 1d6:	82 e3       	ldi	r24, 0x32	; 50
+ 1d8:	80 93 66 00 	sts	0x0066, r24
+ 1dc:	01 c0       	rjmp	.+2      	; 0x1e0 <__vector_2+0x6c>
+			}
+	}
+	else
+	{
+		powerOff();
+ 1de:	c0 98       	cbi	0x18, 0	; 24
+	}
+	
+}
+ 1e0:	ff 91       	pop	r31
+ 1e2:	ef 91       	pop	r30
+ 1e4:	9f 91       	pop	r25
+ 1e6:	8f 91       	pop	r24
+ 1e8:	0f 90       	pop	r0
+ 1ea:	0f be       	out	0x3f, r0	; 63
+ 1ec:	0f 90       	pop	r0
+ 1ee:	1f 90       	pop	r1
+ 1f0:	18 95       	reti
+
+000001f2 <__vector_6>:
+
+ISR(TIM0_COMPA_vect)
+{
+ 1f2:	1f 92       	push	r1
+ 1f4:	0f 92       	push	r0
+ 1f6:	0f b6       	in	r0, 0x3f	; 63
+ 1f8:	0f 92       	push	r0
+ 1fa:	11 24       	eor	r1, r1
+ 1fc:	8f 93       	push	r24
+
+		
+
+		if(tmr > 0)
+ 1fe:	80 91 66 00 	lds	r24, 0x0066
+ 202:	88 23       	and	r24, r24
+ 204:	59 f0       	breq	.+22     	; 0x21c <__vector_6+0x2a>
+		{
+			if(mode == 1)
+ 206:	80 91 60 00 	lds	r24, 0x0060
+ 20a:	81 30       	cpi	r24, 0x01	; 1
+ 20c:	09 f4       	brne	.+2      	; 0x210 <__vector_6+0x1e>
+				powerOff();	
+ 20e:	c0 98       	cbi	0x18, 0	; 24
+			tmr--;
+ 210:	80 91 66 00 	lds	r24, 0x0066
+ 214:	81 50       	subi	r24, 0x01	; 1
+ 216:	80 93 66 00 	sts	0x0066, r24
+ 21a:	05 c0       	rjmp	.+10     	; 0x226 <__vector_6+0x34>
+		}
+		else
+		{
+			if(mode == 1)
+ 21c:	80 91 60 00 	lds	r24, 0x0060
+ 220:	81 30       	cpi	r24, 0x01	; 1
+ 222:	09 f4       	brne	.+2      	; 0x226 <__vector_6+0x34>
+				powerOn();
+ 224:	c0 9a       	sbi	0x18, 0	; 24
+		}
+
+}
+ 226:	8f 91       	pop	r24
+ 228:	0f 90       	pop	r0
+ 22a:	0f be       	out	0x3f, r0	; 63
+ 22c:	0f 90       	pop	r0
+ 22e:	1f 90       	pop	r1
+ 230:	18 95       	reti
+
+00000232 <main>:
+{
+	
+	uint8_t  btnCode, sMode;
+	uint8_t ledCnt;
+
+	cli();
+ 232:	f8 94       	cli
+	// настройка портов
+	PORTB = (1<<P_BTN) | (1<<P_TOUT)|(1<<P_VCOMP);
+ 234:	87 e0       	ldi	r24, 0x07	; 7
+ 236:	88 bb       	out	0x18, r24	; 24
+	DDRB =  (1<<P_TOUT) | LEDP_GREEN | LEDP_RED;
+ 238:	89 e1       	ldi	r24, 0x19	; 25
+ 23a:	87 bb       	out	0x17, r24	; 23
+	// прерывание по изменению лог уровня на P_VCOMP
+	GIMSK = 1<<PCIE;
+ 23c:	80 e2       	ldi	r24, 0x20	; 32
+ 23e:	8b bf       	out	0x3b, r24	; 59
+	PCMSK = 1<<P_VCOMP;
+ 240:	82 e0       	ldi	r24, 0x02	; 2
+ 242:	85 bb       	out	0x15, r24	; 21
+
+	// частота таймера 25600Гц 
+	TCCR0A = (1<<WGM01); // режим CTC
+ 244:	8f bd       	out	0x2f, r24	; 47
+	TCCR0B = (1<<CS00); // без делителя
+ 246:	81 e0       	ldi	r24, 0x01	; 1
+ 248:	83 bf       	out	0x33, r24	; 51
+	OCR0A = F_CPU/(100*256); // частота сети 50Гц * 2 *дискретность 256
+ 24a:	8b eb       	ldi	r24, 0xBB	; 187
+ 24c:	86 bf       	out	0x36, r24	; 54
+	TIMSK0 = 1<<OCIE0A;// прерывание по совпадению
+ 24e:	84 e0       	ldi	r24, 0x04	; 4
+ 250:	89 bf       	out	0x39, r24	; 57
+
+	v = 0;
+ 252:	10 92 63 00 	sts	0x0063, r1
+	//mode = 0; // рабочий работы: 0 - выключен, 1 - фазовый, 2 - числоимпульсный, 100 - сервисный
+	sMode = 0;// сервисный режим: 0 - выключен, 1 - фазовый, 2 - числоимпульсный
+	
+	ledCnt = 0xff;// счетчик периода для светодиодов
+	
+	sei();
+ 256:	78 94       	sei
+	v = 0;
+
+	//mode = 0; // рабочий работы: 0 - выключен, 1 - фазовый, 2 - числоимпульсный, 100 - сервисный
+	sMode = 0;// сервисный режим: 0 - выключен, 1 - фазовый, 2 - числоимпульсный
+	
+	ledCnt = 0xff;// счетчик периода для светодиодов
+ 258:	cf ef       	ldi	r28, 0xFF	; 255
+	TIMSK0 = 1<<OCIE0A;// прерывание по совпадению
+
+	v = 0;
+
+	//mode = 0; // рабочий работы: 0 - выключен, 1 - фазовый, 2 - числоимпульсный, 100 - сервисный
+	sMode = 0;// сервисный режим: 0 - выключен, 1 - фазовый, 2 - числоимпульсный
+ 25a:	d0 e0       	ldi	r29, 0x00	; 0
+			}
+			
+			if(sMode == 1)
+				v = 2;
+			else if(sMode == 2)
+				v = 10;
+ 25c:	0f 2e       	mov	r0, r31
+ 25e:	fa e0       	ldi	r31, 0x0A	; 10
+ 260:	ff 2e       	mov	r15, r31
+ 262:	f0 2d       	mov	r31, r0
+				sMode = 0;
+				mode = 0;
+			}
+			
+			if(sMode == 1)
+				v = 2;
+ 264:	68 94       	set
+ 266:	ee 24       	eor	r14, r14
+ 268:	e1 f8       	bld	r14, 1
+			{
+				// установка рабочего режима работы
+				if(sMode == 1)
+					sMode = 2;
+				else if(sMode == 2)
+					sMode = 1;
+ 26a:	11 e0       	ldi	r17, 0x01	; 1
+			else if(btnCode == BTN1_DCLICK)
+			{
+				// вход в сервисный режим
+				
+				sMode = eeprom_read_byte(&eMode);
+				mode = 100;
+ 26c:	04 e6       	ldi	r16, 0x64	; 100
+	
+	sei();
+    while (1) 
+    {
+
+		ledCnt--; 
+ 26e:	c1 50       	subi	r28, 0x01	; 1
+		ledSM(v, ledCnt);
+ 270:	6c 2f       	mov	r22, r28
+ 272:	80 91 63 00 	lds	r24, 0x0063
+ 276:	ed de       	rcall	.-550    	; 0x52 <ledSM>
+		
+		btnCode = btnSM();
+ 278:	22 df       	rcall	.-444    	; 0xbe <btnSM>
+		
+		if(mode == 0)
+ 27a:	90 91 60 00 	lds	r25, 0x0060
+ 27e:	91 11       	cpse	r25, r1
+ 280:	23 c0       	rjmp	.+70     	; 0x2c8 <main+0x96>
+		{
+			// устройство выключено
+			if(btnCode == BTN1_LCLICK)
+ 282:	83 30       	cpi	r24, 0x03	; 3
+ 284:	b9 f4       	brne	.+46     	; 0x2b4 <main+0x82>
+			{
+				// включение
+				
+				mode = eeprom_read_byte(&eMode);
+ 286:	80 e0       	ldi	r24, 0x00	; 0
+ 288:	90 e0       	ldi	r25, 0x00	; 0
+ 28a:	68 d0       	rcall	.+208    	; 0x35c <eeprom_read_byte>
+				if((mode != 1) && (mode != 2))
+ 28c:	9f ef       	ldi	r25, 0xFF	; 255
+ 28e:	98 0f       	add	r25, r24
+ 290:	92 30       	cpi	r25, 0x02	; 2
+ 292:	18 f4       	brcc	.+6      	; 0x29a <main+0x68>
+			// устройство выключено
+			if(btnCode == BTN1_LCLICK)
+			{
+				// включение
+				
+				mode = eeprom_read_byte(&eMode);
+ 294:	80 93 60 00 	sts	0x0060, r24
+ 298:	02 c0       	rjmp	.+4      	; 0x29e <main+0x6c>
+				if((mode != 1) && (mode != 2))
+					mode = 1;	// по умолчанию включен фазовый режим
+ 29a:	10 93 60 00 	sts	0x0060, r17
+				v = eeprom_read_byte(&eSaveVal);
+ 29e:	81 e0       	ldi	r24, 0x01	; 1
+ 2a0:	90 e0       	ldi	r25, 0x00	; 0
+ 2a2:	5c d0       	rcall	.+184    	; 0x35c <eeprom_read_byte>
+				if(v == 0)
+ 2a4:	88 23       	and	r24, r24
+ 2a6:	19 f0       	breq	.+6      	; 0x2ae <main+0x7c>
+				// включение
+				
+				mode = eeprom_read_byte(&eMode);
+				if((mode != 1) && (mode != 2))
+					mode = 1;	// по умолчанию включен фазовый режим
+				v = eeprom_read_byte(&eSaveVal);
+ 2a8:	80 93 63 00 	sts	0x0063, r24
+ 2ac:	4e c0       	rjmp	.+156    	; 0x34a <main+0x118>
+				if(v == 0)
+					v = 10;		// по умолчанию выходная мощность 100%
+ 2ae:	f0 92 63 00 	sts	0x0063, r15
+ 2b2:	4b c0       	rjmp	.+150    	; 0x34a <main+0x118>
+			}
+			else if(btnCode == BTN1_DCLICK)
+ 2b4:	82 30       	cpi	r24, 0x02	; 2
+ 2b6:	09 f0       	breq	.+2      	; 0x2ba <main+0x88>
+ 2b8:	48 c0       	rjmp	.+144    	; 0x34a <main+0x118>
+			{
+				// вход в сервисный режим
+				
+				sMode = eeprom_read_byte(&eMode);
+ 2ba:	80 e0       	ldi	r24, 0x00	; 0
+ 2bc:	90 e0       	ldi	r25, 0x00	; 0
+ 2be:	4e d0       	rcall	.+156    	; 0x35c <eeprom_read_byte>
+ 2c0:	d8 2f       	mov	r29, r24
+				mode = 100;
+ 2c2:	00 93 60 00 	sts	0x0060, r16
+ 2c6:	41 c0       	rjmp	.+130    	; 0x34a <main+0x118>
+			}
+		}
+
+		else if((mode == 1) || (mode == 2))
+ 2c8:	2f ef       	ldi	r18, 0xFF	; 255
+ 2ca:	29 0f       	add	r18, r25
+ 2cc:	22 30       	cpi	r18, 0x02	; 2
+ 2ce:	f0 f4       	brcc	.+60     	; 0x30c <main+0xda>
+		{
+			// устройство находится в рабочем режиме
+			if(btnCode == BTN1_CLICK)
+ 2d0:	81 30       	cpi	r24, 0x01	; 1
+ 2d2:	59 f4       	brne	.+22     	; 0x2ea <main+0xb8>
+			{
+				// установка мощности
+				if(v < 10)
+ 2d4:	80 91 63 00 	lds	r24, 0x0063
+ 2d8:	8a 30       	cpi	r24, 0x0A	; 10
+ 2da:	20 f4       	brcc	.+8      	; 0x2e4 <main+0xb2>
+					v++;
+ 2dc:	8f 5f       	subi	r24, 0xFF	; 255
+ 2de:	80 93 63 00 	sts	0x0063, r24
+ 2e2:	33 c0       	rjmp	.+102    	; 0x34a <main+0x118>
+				else
+					v = 1;
+ 2e4:	10 93 63 00 	sts	0x0063, r17
+ 2e8:	30 c0       	rjmp	.+96     	; 0x34a <main+0x118>
+			}
+			else if(btnCode == BTN1_LCLICK)
+ 2ea:	83 30       	cpi	r24, 0x03	; 3
+ 2ec:	71 f5       	brne	.+92     	; 0x34a <main+0x118>
+			{
+					// выключение
+					if(v != eeprom_read_byte(&eSaveVal))
+ 2ee:	81 e0       	ldi	r24, 0x01	; 1
+ 2f0:	90 e0       	ldi	r25, 0x00	; 0
+ 2f2:	34 d0       	rcall	.+104    	; 0x35c <eeprom_read_byte>
+ 2f4:	60 91 63 00 	lds	r22, 0x0063
+ 2f8:	86 17       	cp	r24, r22
+ 2fa:	19 f0       	breq	.+6      	; 0x302 <main+0xd0>
+					{
+						// сохранение текущего значения
+						eeprom_write_byte(&eSaveVal, v);
+ 2fc:	81 e0       	ldi	r24, 0x01	; 1
+ 2fe:	90 e0       	ldi	r25, 0x00	; 0
+ 300:	34 d0       	rcall	.+104    	; 0x36a <eeprom_write_byte>
+					}
+					mode = 0;
+ 302:	10 92 60 00 	sts	0x0060, r1
+					v = 0;
+ 306:	10 92 63 00 	sts	0x0063, r1
+ 30a:	1f c0       	rjmp	.+62     	; 0x34a <main+0x118>
+			}
+		}
+		else if(mode == 100)
+ 30c:	94 36       	cpi	r25, 0x64	; 100
+ 30e:	e9 f4       	brne	.+58     	; 0x34a <main+0x118>
+		{
+			// устройство находится в сервисном режиме
+			
+			if(btnCode == BTN1_CLICK)
+ 310:	81 30       	cpi	r24, 0x01	; 1
+ 312:	31 f4       	brne	.+12     	; 0x320 <main+0xee>
+			{
+				// установка рабочего режима работы
+				if(sMode == 1)
+ 314:	d1 30       	cpi	r29, 0x01	; 1
+ 316:	01 f1       	breq	.+64     	; 0x358 <main+0x126>
+					sMode = 2;
+				else if(sMode == 2)
+ 318:	d2 30       	cpi	r29, 0x02	; 2
+ 31a:	71 f4       	brne	.+28     	; 0x338 <main+0x106>
+					sMode = 1;
+ 31c:	d1 2f       	mov	r29, r17
+ 31e:	0c c0       	rjmp	.+24     	; 0x338 <main+0x106>
+			}
+			if(btnCode == BTN1_LCLICK)
+ 320:	83 30       	cpi	r24, 0x03	; 3
+ 322:	51 f4       	brne	.+20     	; 0x338 <main+0x106>
+			{
+				// выход из сервисного режима
+				// сохранение настроек
+				eeprom_write_byte(&eMode, sMode);
+ 324:	6d 2f       	mov	r22, r29
+ 326:	80 e0       	ldi	r24, 0x00	; 0
+ 328:	90 e0       	ldi	r25, 0x00	; 0
+ 32a:	1f d0       	rcall	.+62     	; 0x36a <eeprom_write_byte>
+				v = 0;
+ 32c:	10 92 63 00 	sts	0x0063, r1
+				sMode = 0;
+				mode = 0;
+ 330:	10 92 60 00 	sts	0x0060, r1
+			{
+				// выход из сервисного режима
+				// сохранение настроек
+				eeprom_write_byte(&eMode, sMode);
+				v = 0;
+				sMode = 0;
+ 334:	d0 e0       	ldi	r29, 0x00	; 0
+ 336:	09 c0       	rjmp	.+18     	; 0x34a <main+0x118>
+				mode = 0;
+			}
+			
+			if(sMode == 1)
+ 338:	d1 30       	cpi	r29, 0x01	; 1
+ 33a:	19 f4       	brne	.+6      	; 0x342 <main+0x110>
+				v = 2;
+ 33c:	e0 92 63 00 	sts	0x0063, r14
+ 340:	04 c0       	rjmp	.+8      	; 0x34a <main+0x118>
+			else if(sMode == 2)
+ 342:	d2 30       	cpi	r29, 0x02	; 2
+ 344:	11 f4       	brne	.+4      	; 0x34a <main+0x118>
+				v = 10;
+ 346:	f0 92 63 00 	sts	0x0063, r15
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 34a:	8f e6       	ldi	r24, 0x6F	; 111
+ 34c:	97 e1       	ldi	r25, 0x17	; 23
+ 34e:	01 97       	sbiw	r24, 0x01	; 1
+ 350:	f1 f7       	brne	.-4      	; 0x34e <main+0x11c>
+ 352:	00 c0       	rjmp	.+0      	; 0x354 <main+0x122>
+ 354:	00 00       	nop
+ 356:	8b cf       	rjmp	.-234    	; 0x26e <main+0x3c>
+			
+			if(btnCode == BTN1_CLICK)
+			{
+				// установка рабочего режима работы
+				if(sMode == 1)
+					sMode = 2;
+ 358:	de 2d       	mov	r29, r14
+ 35a:	ee cf       	rjmp	.-36     	; 0x338 <main+0x106>
+
+0000035c <eeprom_read_byte>:
+ 35c:	e1 99       	sbic	0x1c, 1	; 28
+ 35e:	fe cf       	rjmp	.-4      	; 0x35c <eeprom_read_byte>
+ 360:	8e bb       	out	0x1e, r24	; 30
+ 362:	e0 9a       	sbi	0x1c, 0	; 28
+ 364:	99 27       	eor	r25, r25
+ 366:	8d b3       	in	r24, 0x1d	; 29
+ 368:	08 95       	ret
+
+0000036a <eeprom_write_byte>:
+ 36a:	26 2f       	mov	r18, r22
+
+0000036c <eeprom_write_r18>:
+ 36c:	e1 99       	sbic	0x1c, 1	; 28
+ 36e:	fe cf       	rjmp	.-4      	; 0x36c <eeprom_write_r18>
+ 370:	1c ba       	out	0x1c, r1	; 28
+ 372:	8e bb       	out	0x1e, r24	; 30
+ 374:	2d bb       	out	0x1d, r18	; 29
+ 376:	0f b6       	in	r0, 0x3f	; 63
+ 378:	f8 94       	cli
+ 37a:	e2 9a       	sbi	0x1c, 2	; 28
+ 37c:	e1 9a       	sbi	0x1c, 1	; 28
+ 37e:	0f be       	out	0x3f, r0	; 63
+ 380:	01 96       	adiw	r24, 0x01	; 1
+ 382:	08 95       	ret
+
+00000384 <_exit>:
+ 384:	f8 94       	cli
+
+00000386 <__stop_program>:
+ 386:	ff cf       	rjmp	.-2      	; 0x386 <__stop_program>

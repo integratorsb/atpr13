@@ -1,47 +1,61 @@
-# Windows image file caches
-Thumbs.db
-ehthumbs.db
+# Prerequisites
+*.d
 
-# Folder config file
-Desktop.ini
+# Object files
+*.o
+*.ko
+*.obj
+*.elf
 
-# Recycle Bin used on file shares
-$RECYCLE.BIN/
+# Precompiled Headers
+*.gch
+*.pch
 
-# Windows Installer files
-*.cab
-*.msi
-*.msm
-*.msp
+# Libraries
+*.lib
+*.a
+*.la
+*.lo
 
-# Windows shortcuts
-*.lnk
+# Shared objects (inc. Windows DLLs)
+*.dll
+*.so
+*.so.*
+*.dylib
 
-# =========================
-# Operating System Files
-# =========================
+# Executables
+*.exe
+*.out
+*.app
+*.i*86
+*.x86_64
+#*.hex
 
-# OSX
-# =========================
+# Debug files
+*.dSYM/
+*.su
 
-.DS_Store
-.AppleDouble
-.LSOverride
 
-# Thumbnails
-._*
+# For PCBs designed using KiCad: http://www.kicad-pcb.org/
 
-# Files that might appear in the root of a volume
-.DocumentRevisions-V100
-.fseventsd
-.Spotlight-V100
-.TemporaryItems
-.Trashes
-.VolumeIcon.icns
+# Temporary files
+*.000
+*.bak
+*.bck
+*.kicad_pcb-bak
+*~
+_autosave-*
+*.tmp
 
-# Directories potentially created on remote AFP share
-.AppleDB
-.AppleDesktop
-Network Trash Folder
-Temporary Items
-.apdisk
+# Netlist files (exported from Eeschema)
+*.net
+
+# Autorouter files (exported from Pcbnew)
+.dsn
+
+# Exported BOM files
+*.xml
+*.csv
+
+*.cproj
+*.atsln
